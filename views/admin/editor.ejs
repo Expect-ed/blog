@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= post ? '编辑文章' : '新建文章' %> · <%= config.blogTitle %></title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+  <nav class="admin-nav">
+    <a href="/admin/dashboard" class="btn btn-ghost">← 返回</a>
+    <span class="nav-brand"><%= post ? '编辑文章' : '新建文章' %></span>
+    <div></div>
+  </nav>
+  <main class="admin-main editor-main">
+    <form method="POST" action="<%= post ? '/admin/posts/' + post.id + '/edit' : '/admin/posts/new' %>" class="editor-form">
+      <input
+        type="text"
+        name="title"
+        class="title-input"
+        placeholder="文章标题"
+        value="<%= post ? post.title : '' %>"
+        required
+      >
+      <textarea
+        name="content"
+        class="content-input"
+        placeholder="正文内容，支持 Markdown 格式..."
+      ><%= post ? post.content : '' %></textarea>
+      <div class="editor-footer">
+        <button type="submit" class="btn btn-save">保存</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

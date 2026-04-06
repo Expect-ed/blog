@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录后台</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/admin.css">
+</head>
+<body class="login-page">
+  <div class="login-card">
+    <h1>管理后台</h1>
+    <% if (error) { %>
+      <div class="alert-error"><%= error %></div>
+    <% } %>
+    <form method="POST" action="/admin/login">
+      <input type="password" name="password" placeholder="输入管理密码" required autofocus>
+      <button type="submit">进入后台</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= config.blogTitle %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="site-title"><%= config.blogTitle %></a>
+      <p class="site-desc"><%= config.blogDescription %></p>
+    </div>
+  </header>
+  <main class="container">
+    <% if (posts.length === 0) { %>
+      <p class="empty-state">还没有文章，去写第一篇吧。</p>
+    <% } else { %>
+      <div class="post-list">
+        <% posts.forEach((post, i) => { %>
+          <a href="/<%= post.slug %>" class="post-item">
+            <span class="post-num">0<%= i + 1 %></span>
+            <div class="post-meta">
+              <h2 class="post-title"><%= post.title %></h2>
+              <time class="post-date"><%= post.created_at.split(' ')[0] %></time>
+            </div>
+            <span class="post-arrow">→</span>
+          </a>
+        <% }) %>
+      </div>
+    <% } %>
+  </main>
+</body>
+</html>

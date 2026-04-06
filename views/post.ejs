@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= post.title %> · <%= config.blogTitle %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="header-inner">
+      <a href="/" class="site-title"><%= config.blogTitle %></a>
+    </div>
+  </header>
+  <main class="container article-container">
+    <article>
+      <div class="article-header">
+        <h1><%= post.title %></h1>
+        <time><%= post.created_at.split(' ')[0] %></time>
+      </div>
+      <div class="article-body">
+        <%- post.html %>
+      </div>
+    </article>
+    <footer class="article-footer">
+      <a href="/" class="back-link">← 返回首页</a>
+    </footer>
+  </main>
+</body>
+</html>

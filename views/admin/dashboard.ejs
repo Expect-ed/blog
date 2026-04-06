@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文章管理 · <%= config.blogTitle %></title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+  <nav class="admin-nav">
+    <span class="nav-brand"><%= config.blogTitle %></span>
+    <div class="nav-actions">
+      <a href="/admin/posts/new" class="btn">＋ 新建文章</a>
+      <a href="/" target="_blank" class="btn btn-outline">查看前台</a>
+      <a href="/admin/logout" class="btn btn-ghost">退出</a>
+    </div>
+  </nav>
+  <main class="admin-main">
+    <div class="page-title">
+      <h2>所有文章</h2>
+      <span class="count"><%= posts.length %> 篇</span>
+    </div>
+    <% if (posts.length === 0) { %>
+      <p class="empty-tip">还没有文章，点击右上角新建吧。</p>
+    <% } else { %>
+      <div class="post-table">
+        <div class="table-head">
+          <span>标题</span>
+          <span>时间</span>
+          <span>状态</span>
+          <span>操作</span>
+        </div>
+        <% posts.forEach(post => { %>
+          <div class="table-row">
+            <span class="col-title"><%= post.title %></span>
+            <span class="col-date"><%= post.created_at.split(' ')[0] %></span>
+            <span class="col-status">
+              <em class="badge <%= post.published ? 'badge-live' : 'badge-draft' %>">
+                <%= post.published ? '已上线' : '草稿' %>
+              </em>
+            </span>
+            <span class="col-actions">
+              <form method="POST" action="/admin/posts/<%= post.id %>/toggle" style="display:inline">
+                <button type="submit" class="action-btn">
+                  <%= post.published ? '下架' : '上线' %>
+                </button>
+              </form>
+              <a href="/admin/posts/<%= post.id %>/edit" class="action-btn">编辑</a>
+              <form method="POST" action="/admin/posts/<%= post.id %>/delete" style="display:inline" onsubmit="return confirm('删除后不可恢复，确认吗？')">
+                <button type="submit" class="action-btn danger">删除</button>
+              </form>
+            </span>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </main>
+</body>
+</html>
